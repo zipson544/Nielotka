@@ -1,0 +1,14 @@
+name: Nielotka
+version: '1.0'
+main: pl.nielotka.Nielotka
+api-version: '1.21'
+description: Wedka nielota - zlapany gracz nie moze latac elytra.
+commands:
+  nielotka:
+    description: Zarzadzanie wedka nielota.
+    usage: /nielotka <give|reload>
+    aliases: [wedkanielota]
+permissions:
+  nielotka.admin:
+    description: Pozwala uzywac /nielotka.
+    default: op

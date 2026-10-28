@@ -1,0 +1,91 @@
+# ========================================
+# Nielotka - konfiguracja
+# Kolory: &a &c &l itd.
+# Placeholdery: {TIME} (sekundy), {SHOOTER} (lapiacy), {TARGET} (zlapany)
+# ========================================
+
+rod:
+  material: FISHING_ROD
+  name: '&5&lWędka nielota'
+  lore:
+    - '&8 » &7Wędka nielota była do zdobycia'
+    - '&8 » &7w &f2024 roku &7podczas &adnia dziecka&7.'
+    - '&r'
+    - '&8 » &7Po złapaniu gracza na haczyk'
+    - '&8 » &7nie może on odlecieć &delytrą&7!'
+  custom-model-data: 2
+  unbreakable: true
+  flags: [HIDE_ENCHANTS, HIDE_UNBREAKABLE, HIDE_ATTRIBUTES]
+
+effect:
+  # Ile sekund zlapany gracz nie moze latac elytra
+  duration: 15
+  # Cooldown w sekundach liczony OD MOMENTU ZLAPANIA (30 = 15 s efektu + 15 s czekania)
+  cooldown: 30
+  # Efekt konczy sie, gdy lapiacy nie ma wedki w zadnej rece
+  end-when-rod-not-in-hand: true
+  # Jesli zlapany gracz juz leci - przerwij mu lot
+  stop-current-glide: true
+  # Zablokuj rzut wedka w czasie cooldownu
+  block-cast-on-cooldown: true
+
+bossbar:
+  enabled: true
+  title: '&cPosiadasz klątwę! Nie możesz latać przez &e{TIME}s&c!'
+  color: RED          # PINK BLUE RED GREEN YELLOW PURPLE WHITE
+  style: SOLID        # SOLID SEGMENTED_6 SEGMENTED_10 SEGMENTED_12 SEGMENTED_20
+
+# Kazda wiadomosc: title, subtitle, chat, actionbar (puste = nic)
+# {nick} = nick drugiego gracza (dla lapiacego: zlapany, dla zlapanego: lapiacy)
+messages:
+  cooldown:
+    actionbar: '&cWędka będzie dostępna za &e{TIME}s&c!'
+  shooter:
+    activate:
+      title: '&a&lZłapałeś gracza!'
+      subtitle: '&7Złapany gracz: &e{TARGET}'
+      chat: '&aZłapałeś gracza &e{nick}&7!'
+    cancel:
+      title: '&c&lPuściłeś gracza!'
+      subtitle: '&cPuściłeś gracza!'
+      chat: ''
+    timeout:
+      title: ''
+      subtitle: ''
+      chat: ''
+  target:
+    activate:
+      title: '&c&lZłapany!'
+      subtitle: '&7Złapany przez: &e{SHOOTER}'
+      chat: '&aZłapał Cię gracz &e{nick}&a!'
+    glide-blocked:
+      title: ''
+      subtitle: ''
+      chat: ''
+      actionbar: ''
+    cancel:
+      title: '&c&lUwolniony!'
+      subtitle: '&7Klątwa została zdjęta!'
+      chat: ''
+    timeout:
+      title: ''
+      subtitle: ''
+      chat: ''
+  no-permission: '&cBrak uprawnień.'
+  reloaded: '&aPrzeładowano konfigurację.'
+  given: '&aDano wędkę nielotę graczowi &e{TARGET}&a.'
+  usage: '&7Użycie: &f/nielotka give [gracz] [ilość] &7| &f/nielotka reload'
+  player-not-found: '&cNie znaleziono gracza.'
+
+# Dzwieki - nazwy w formacie Minecrafta (kropki), np. entity.elder_guardian.curse
+sounds:
+  activate:        # dla lapiacego
+    enabled: true
+    sound: entity.fishing_bobber.throw
+    volume: 1.0
+    pitch: 0.8
+  curse:           # dla zlapanego
+    enabled: true
+    sound: entity.elder_guardian.curse
+    volume: 0.8
+    pitch: 1.0
